@@ -1,3 +1,11 @@
+"""
+@author: pgromano
+
+This majority of this code is based off of the repo
+github.com/gtaylor/petfinder-api/. For any issues with the API, please look at
+the Petfinder developer site (http://www.petfinder.com/developers).
+"""
+
 from . import parser
 from lxml import etree
 import requests
