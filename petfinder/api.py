@@ -58,6 +58,7 @@ class PetfinderClient(object):
         [1]: http://www.petfinder.com/developers/api-key
         [2]: http://www.petfinder.com/developers/api-docs
     """
+
     def __init__(self, api_key, api_secret, api_auth_token=None,
                  animal=None, age=None, breed=None, location=None,
                  max_results=10, sex=None, size=None, offset=None):
@@ -92,12 +93,15 @@ class PetfinderClient(object):
         breeds : list
             List of breeds
         """
+ 
         if hasattr(self, '_breeds'):
             return self._breeds
         self._all_breeds = self._get_all_breeds()
         return self._all_breeds
 
     def find(self, return_type='full'):
+        """ Find pets near """
+
         # Define query parameters
         query = {"key": self.api_key,
                  "format": "xml",
@@ -138,6 +142,7 @@ class PetfinderClient(object):
         record : dict
             A record of the queried pet.
         """
+        
         # If no pet_id given, then randomly select pet
         if pet_id is None:
             # Define query parameters
@@ -176,6 +181,8 @@ class PetfinderClient(object):
                     setattr(self, key, kwargs[key])
 
     def _get_all_breeds(self):
+        """ Helper function to get all breeds """
+
         if self.animal is None:
             raise ValueError("Animal type must be set!")
 
