@@ -66,12 +66,16 @@ def pet_records(results, return_type):
         record["Email"] = pet.find("contact/email").text
 
         # Get all media
-        record["Image_URL"] = []
+        urls = []
+        for photos in pet.findall("media/photos"):
+            try:
+                urls.append(photos.find('photo').text)
+            except:
+                pass
         try:
-            for image_url in pet.find("media/photos/photo"):
-                record["Image_URL"].append(image_url)
+            record["Image_URL"] = ", ".join(urls)
         except:
-            pass
+            record["Image_URL"] = ""
 
         # If return_type is full, get description of pet
         if return_type == "full":
